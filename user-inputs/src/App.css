@@ -1,0 +1,14 @@
+body {
+  background: #efefef;
+  padding: 20px;
+}
+
+.App {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.suggest {
+  max-width: 500px;
+  margin: 0 auto;
+}
