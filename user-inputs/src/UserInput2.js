@@ -18,10 +18,19 @@ export default function UserInput2() {
     backDate: new Date(),
     departure: null,
     destination1: null,
-    destination2: null
+    destination2: null,
+    destination3: null,
+    destination4: null,
+    destination5: null,
+    destination6: null,
+    destination7: null,
+    destination8: null
   };
 
+  const initDest = [2];
+
   const [formData, setFormData] = React.useState(initialState);
+  const [destInputs, setDestInputs] = React.useState(initDest);
 
   const handleChange = (name, date) => {
     console.log('the date being changed', date);
@@ -32,15 +41,10 @@ export default function UserInput2() {
     });
   };
 
-  const storeDestination = (name, data) => {
-    console.log('name', name);
-    console.log('data', data);
-
-    setFormData({
-      ...formData,
-      [name]: data
+  const appendInput = () => {
+    setDestInputs(prevState => {
+      return prevState.concat(initDest[initDest.length - 1] + 1);
     });
-    console.log('state in parent', this.state);
   };
 
   return (
@@ -58,13 +62,20 @@ export default function UserInput2() {
           name="destination1"
           storeDestination={handleChange}
         />
+        {destInputs.map((num, index) => (
+          <div>
+            <br></br>
+            <DestAirportAutocomplete
+              label="Option"
+              name={`destination${num}`}
+              storeDestination={handleChange}
+            />
+          </div>
+        ))}
 
+        <button onClick={() => appendInput()}>CLICK ME TO ADD AN INPUT</button>
         <br></br>
-        <DestAirportAutocomplete
-          label="Option"
-          name="destination2"
-          storeDestination={handleChange}
-        />
+        <br></br>
         <KeyboardDatePicker
           variant="outlined"
           margin="normal"
