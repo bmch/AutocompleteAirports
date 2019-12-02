@@ -1,14 +1,14 @@
 import 'date-fns';
 import React from 'react';
-import Grid from '@material-ui/core/Grid';
 import DateFnsUtils from '@date-io/date-fns';
 import {
   MuiPickersUtilsProvider,
-  KeyboardTimePicker,
   KeyboardDatePicker
 } from '@material-ui/pickers';
 import DestAirportAutocomplete from './DestAirportAutocomplete';
+import AddIcon from '@material-ui/icons/Add';
 import './App.css';
+import Fab from '@material-ui/core/Fab';
 
 export default function UserInput2() {
   // The first commit of Material-UI
@@ -16,18 +16,10 @@ export default function UserInput2() {
   const initialState = {
     goDate: new Date(),
     backDate: new Date(),
-    departure: null,
-    destination1: null,
-    destination2: null,
-    destination3: null,
-    destination4: null,
-    destination5: null,
-    destination6: null,
-    destination7: null,
-    destination8: null
+    departure: null
   };
 
-  const initDest = [2];
+  const initDest = [];
 
   const [formData, setFormData] = React.useState(initialState);
   const [destInputs, setDestInputs] = React.useState(initDest);
@@ -43,7 +35,7 @@ export default function UserInput2() {
 
   const appendInput = () => {
     setDestInputs(prevState => {
-      return prevState.concat(initDest[initDest.length - 1] + 1);
+      return prevState.concat(prevState.length + 1);
     });
   };
 
@@ -55,7 +47,6 @@ export default function UserInput2() {
           name="departure"
           storeDestination={handleChange}
         />
-
         <br></br>
         <DestAirportAutocomplete
           label="To"
@@ -63,17 +54,19 @@ export default function UserInput2() {
           storeDestination={handleChange}
         />
         {destInputs.map((num, index) => (
-          <div>
+          <div key={index}>
             <br></br>
             <DestAirportAutocomplete
-              label="Option"
+              label={`Destination Option ${num}`}
               name={`destination${num}`}
               storeDestination={handleChange}
             />
           </div>
         ))}
-
-        <button onClick={() => appendInput()}>CLICK ME TO ADD AN INPUT</button>
+        <span>Add another destination</span>
+        <Fab color="primary" aria-label="add">
+          <AddIcon onClick={() => appendInput()} />
+        </Fab>
         <br></br>
         <br></br>
         <KeyboardDatePicker
