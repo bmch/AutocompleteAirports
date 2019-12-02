@@ -16,7 +16,8 @@ export default function UserInput2() {
   const initialState = {
     goDate: new Date(),
     backDate: new Date(),
-    departure: null
+    departure: null,
+    destination1: null
   };
 
   const initDest = [];
@@ -35,7 +36,7 @@ export default function UserInput2() {
 
   const appendInput = () => {
     setDestInputs(prevState => {
-      return prevState.concat(prevState.length + 1);
+      return prevState.concat(prevState.length + 2);
     });
   };
 
